@@ -18,7 +18,6 @@ The dashboard pulls data from the following CSV files:
 - `deskenergy.csv`: Desk-specific energy consumption data
 
 ## Getting Started
-1. Clone this repository
-2. Open `energycharts.html` in your web browser
-3. The dashboard will automatically load and display the visualizations
+1. Download and open `energycharts.html` in your web browser, all csv references will pull from this repository
+
 
