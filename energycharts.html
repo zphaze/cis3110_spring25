@@ -9,11 +9,11 @@
         .chart-container {
             position: relative;
             margin-bottom: 30px;
-            height: 300px; /* Set a fixed height for all chart containers */
+            height: 300px; 
         }
         
         .row-charts .card {
-            height: 100%; /* Make all cards in the row take full height */
+            height: 100%; 
         }
         
         .row-charts .card-body {
@@ -23,7 +23,7 @@
         }
         
         .row-charts .chart-container {
-            flex: 1; /* Allow chart container to expand to fill available space */
+            flex: 1; 
         }
     </style>
 </head>
@@ -286,16 +286,15 @@
         });
 
         function fetchDataAndUpdateCharts() {
-            // Primary data source for most charts
             Papa.parse('https://raw.githubusercontent.com/zphaze/cis3110_spring25/refs/heads/main/dailyenergy.csv', {
                 download: true,
-                header: false, // CSV doesn't have headers
+                header: false, 
                 skipEmptyLines: true,
                 complete: function(results) {
                     console.log("Parsed CSV data:", results);
                     
                     if (results.data && results.data.length > 0) {
-                        const dataRow = results.data[0]; // Get the first row
+                        const dataRow = results.data[0]; 
                         const days = [];
                         const energyValues = [];
                         
@@ -341,19 +340,16 @@
                 }
             });
             
-            // Updated: Use energydist.csv for the pie chart
             Papa.parse('https://raw.githubusercontent.com/zphaze/cis3110_spring25/refs/heads/main/energydist.csv', {
                 download: true,
-                header: false, // CSV doesn't have headers
+                header: false, 
                 skipEmptyLines: true,
-                dynamicTyping: true, // Automatically convert numeric strings to numbers
+                dynamicTyping: true, 
                 complete: function(results) {
                     console.log("Parsed energy distribution data:", results);
                     
-                    // Define the expected labels for the pie chart
+
                     const labels = results.data[0];
-                    
-                    // Get the first row of data (should be the only row)
                     const dataRow = results.data[1];
                     
                     // Validate each value is a number
@@ -376,7 +372,6 @@
                     console.log("Energy Distribution Labels:", labels);
                     console.log("Energy Distribution Values:", energyValues);
                     
-                    // Update pie chart with energy distribution data
                     pieChart.data.labels = labels;
                     pieChart.data.datasets[0].data = energyValues;
                     pieChart.update();
@@ -387,7 +382,6 @@
                 }
             });
             
-            // Secondary data source for line chart (middle chart in row 2)
             Papa.parse('https://raw.githubusercontent.com/zphaze/cis3110_spring25/refs/heads/main/cleaned-ev-charging-data.csv', {
                 download: true,
                 header: false, // CSV has the same format, so no headers
@@ -418,7 +412,6 @@
                         console.log("Sessions:", sessions);
                         console.log("Charging Values:", chargingValues);
                         
-                        // Update line chart with EV charging data using numerical x-axis
                         lineChart.options.scales.x.ticks = {
                             callback: function(value, index) {
                                 return index + 1; // Display as numeric values
@@ -436,10 +429,9 @@
                 }
             });
             
-            // NEW: Data source for scatter chart (right chart in row 2)
             Papa.parse('https://raw.githubusercontent.com/zphaze/cis3110_spring25/refs/heads/main/deskenergy.csv', {
                 download: true,
-                header: false, // CSV has the same format, so no headers
+                header: false,
                 skipEmptyLines: true,
                 complete: function(results) {
                     console.log("Parsed desk energy data:", results);
@@ -466,7 +458,6 @@
                         console.log("Days for desk energy:", days);
                         console.log("Desk Energy Values:", deskEnergyValues);
                         
-                        // Update scatter chart with desk energy data
                         let scatterData = [];
                         for (let i = 0; i < days.length; i++) {
                             scatterData.push({
@@ -475,7 +466,6 @@
                             });
                         }
                         
-                        // Update scatter chart options
                         scatterChart.options.scales.x.min = 1;
                         scatterChart.options.scales.x.ticks = {
                             precision: 0, // Ensure whole numbers
